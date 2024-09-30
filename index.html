@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculadora de Consumo de Energia</title>
+</head>
+<body>
+    <main>
+        <h1 class="aqua">Aqua Energy</h1>
+        <section>
+        <div class="calculadora">
+            <h1 class="aquaenergy">Calculadora de Consumo de Energia</h1>
+
+            <label class="selecao" for="potencias">Selecione a Potência do seu chuveiro:</label>
+            <input list="potencias" name="potencias" id="watts">
+            <datalist id="potencias">
+                <option value="5500">5500W</option>
+                <option value="7500">7500W</option>
+                <option value="8500">8500W</option>
+                <option value="9500">9500W</option>
+            </datalist> <br><br>
+
+            <p class="tempo">Digite o tempo em minutos: </p>
+
+            <p id="resultado"></p>
+
+            <table>
+                <tr>
+                    <td><button class="botao" onclick="clean()">C</button></td>
+                    <td><button class="botao" onclick="back()"><</button></td>
+                    <td colspan="2"><button class="botao" style="width: 106px;" onclick="calcularConsumo()">=</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('7')">7</button></td>
+                    <td><button class="botao" onclick="insert('8')">8</button></td>
+                    <td><button class="botao" onclick="insert('9')">9</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('4')">4</button></td>
+                    <td><button class="botao" onclick="insert('5')">5</button></td>
+                    <td><button class="botao" onclick="insert('6')">6</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('1')">1</button></td>
+                    <td><button class="botao" onclick="insert('2')">2</button></td>
+                    <td><button class="botao" onclick="insert('3')">3</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button class="botao" style="width: 106px;" onclick="insert('0')">0</button></td>
+                    <td><button class="botao" onclick="insert('.')">.</button></td>
+                </tr>
+            </table>
+            
+
+        </div>
+
+    </section>
+
+</main>
+    
+
+    <script>
+        function insert(num) {
+            var numero = document.getElementById('resultado').innerHTML;
+            document.getElementById('resultado').innerHTML = numero + num;
+        }
+
+        function clean() {
+            document.getElementById('resultado').innerHTML = "";
+        }
+
+        function back() {
+            var resultado = document.getElementById('resultado').innerHTML;
+            document.getElementById('resultado').innerHTML = resultado.substring(0, resultado.length - 1);
+        }
+
+        function calcularConsumo() {
+            var potencia = document.getElementById('watts').value;
+            var tempo = document.getElementById('resultado').innerHTML;
+
+            if (potencia && tempo) {
+                var consumo = (potencia * tempo) / 1000;
+                document.getElementById('resultado').innerHTML = 'Consumo = ' + consumo.toFixed(2) + ' kWh';
+            } else {
+                document.getElementById('resultado').innerHTML = "Insira os valores.";
+            }
+        }
+    </script>
+</body>
+</html>
